@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "expenser"
+version = "0.0.1"
+description = "Simple CLI application written from python for track and manage expenses"
+readme = "README.md"
+authors = [{ name = "Trishan Fernando", email = "sanjanatrishan@gmail.com" }]
+
+
+[project.scripts]
+expenser = "expenser_tracker.expenser:main"
