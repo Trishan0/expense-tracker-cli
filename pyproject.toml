@@ -11,4 +11,4 @@ authors = [{ name = "Trishan Fernando", email = "sanjanatrishan@gmail.com" }]
 
 
 [project.scripts]
-expenser = "expenser_tracker.expenser:main"
+expenser = "expense_tracker.expenser:main"
