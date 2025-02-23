@@ -1,5 +1,5 @@
 import argparse as arg
-from methods import add_expense, update_expense, delete_expense, summary_expenses, view_all_expenses,month_expense, month_summary, FILE_NAME
+from expense_tracker.methods import add_expense, update_expense, delete_expense, summary_expenses, view_all_expenses,month_expense, month_summary, FILE_NAME
 def main():
     
     parser = arg.ArgumentParser(
