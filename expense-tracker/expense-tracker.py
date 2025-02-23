@@ -3,31 +3,42 @@ from methods import add_expense, update_expense, delete_expense, summary_expense
 def main():
     
     parser = arg.ArgumentParser(
-        description="Capture and save expenses to a JSON file")
+        description="Track and manage expenses",
+        formatter_class=arg.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  expense-tracker add --description "Lunch" --amount 20
+  expense-tracker list
+  expense-tracker summary --month 8
+  expense-tracker update --id 1 --description "Dinner" --amount 25
+  expense-tracker delete --id 1""")
 
     subparsers = parser.add_subparsers(dest="command", help="Available Commands")
 
     # add expenses commands
     add_parser = subparsers.add_parser('add', help="Add a new expense")
-    add_parser.add_argument('--description','-d',type=str, help="Expense Description")
-    add_parser.add_argument('--amount', '-a', type=int, help="Cost of the expense")
+    add_parser.add_argument('--description', '-d', required=True, help="Expense description")
+    add_parser.add_argument('--amount', '-a', required=True, type=float, help="Expense amount")
 
     # update expenses commands
     update_parser = subparsers.add_parser('update', help="Update an existing expense")
-    update_parser.add_argument('--id',type=int, help="Expense ID")
-    update_parser.add_argument('--description','-d',type=str, help="New Description")
-    update_parser.add_argument('--amount', '-a', type=int, help="New cost of the expense")
+    update_parser.add_argument('--id', required=True, type=int, help="Expense ID")
+    update_parser.add_argument('--description', '-d', help="New description")
+    update_parser.add_argument('--amount', '-a', type=float, help="New amount")
 
-    # Delete expenses command
-    delete_parser = subparsers.add_parser('delete', help="Delete an Expense")
-    delete_parser.add_argument('--id', required=True, type=int, help='ID of the expense to delete')
+ # Delete expense
+    delete_parser = subparsers.add_parser('delete', help="Delete an expense")
+    delete_parser.add_argument('--id', required=True, type=int, help="Expense ID")
 
-    # List all expenses command
-    view_parser = subparsers.add_parser('list', help="View all the expenses")
-    view_parser.add_argument('--month', '-m', type=int)
+    # List expenses
+    list_parser = subparsers.add_parser('list', help="List all expenses")
+    list_parser.add_argument('--month', '-m', type=int, choices=range(1, 13),
+                            help="Filter by month (1-12)")
 
-    summary_parser = subparsers.add_parser('summary', help="Summary of Expenses")
-    summary_parser.add_argument('--month','-m', help="Get a summary of specifi month by month number")
+    # Summary
+    summary_parser = subparsers.add_parser('summary', help="Show expense summary")
+    summary_parser.add_argument('--month', '-m', type=int, choices=range(1, 13),
+                              help="Show summary for specific month (1-12)")
     
     
     args = parser.parse_args()
@@ -59,4 +70,5 @@ def main():
     else:
         parser.print_help()
         
-main()
+if __name__ == "__main__":
+    main()
