@@ -1,7 +1,7 @@
 import json
 from pathlib import Path
 from datetime import datetime
-
+import calendar
 
 FILE_NAME = 'expense_list.json'
 
@@ -88,6 +88,20 @@ def delete_expense(expense_id, file_name=FILE_NAME):
     print(f"Expense with ID {expense_id} not found")
     return False       
     
+def view_all_expenses(file_name=FILE_NAME):
+    """View all expenses"""
+    expenses_list = load_expenses(file_name)
+    
+    if not expenses_list['expenses']:
+        print("No expenses found!\nPlease add an expense first.")
+        return
+    
+    print(f"{'ID':<4} {'Date':<12} {'Description':<15} {'Amount':<10}")
+    print("-" * 45)
+    
+    for expense in expenses_list['expenses']:
+        print(f"{expense['id']:<4} {expense['date']:<12} {expense['expense']:<15} ${expense['amount']:<10}")
+
 def summary_expenses(file_name=FILE_NAME):
     """Get the total amount of the expenses"""
     
@@ -99,3 +113,40 @@ def summary_expenses(file_name=FILE_NAME):
             net_total += expense['amount']
     print(f"Total expenses: ${net_total}")
     return True
+
+def month_summary(file_name=FILE_NAME, month=None):
+    """Ger the summary of a specifi month"""
+    expense_list = load_expenses(file_name)
+    net_total = 0
+    
+    month_expenses = [expense for expense in expense_list['expenses'] if datetime.strptime(expense['date'], "%Y-%m-%d").month == int(month)]
+    
+    if not month_expenses:
+        print(f"No expenses found for month: {calendar.month_name[int(month)]}")
+        return
+        
+    for expense in month_expenses:
+        if expense['amount']:
+            net_total += expense['amount']
+    print(f"Total expenses for {calendar.month_name[int(month)]}: ${net_total}")
+    return True
+    
+
+def month_expense(file_name=FILE_NAME, month=None):
+    """View all expenses of a specific month"""
+    
+    expense_list = load_expenses(file_name)
+    month_expenses = [expense for expense in expense_list['expenses'] if datetime.strptime(expense['date'], "%Y-%m-%d").month == int(month)]
+    
+    if not month_expenses:
+        print(f"No expenses found for month: {calendar.month_name[int(month)]}")
+        return
+    
+    print(f"Expenses of {calendar.month_name[int(month)]} :")
+    print(f"{'ID':<4} {'Date':<12} {'Description':<15} {'Amount':<10}")
+    print("-" * 45)
+    
+    for expense in month_expenses:
+        print(f"{expense['id']:<4} {expense['date']:<12} {expense['expense']:<15} ${expense['amount']:<10}")
+
+# Example usage
