@@ -22,7 +22,6 @@ def save_expenses(expenses, file_name):
     try:
         with open(file_name, 'w') as f:
             json.dump(expenses, f, indent=4)
-        print(f"Data successfully saved to {file_name}")
     except Exception as e:
         print(f"Error writing to file: {e}")
 
