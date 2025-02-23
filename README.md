@@ -20,19 +20,14 @@
 This is a simple command-line-based Expense Tracker written in Python. It allows users to add, update, delete, and view expenses stored in a JSON file. The program also provides summary reports based on recorded expenses.
 
 ## Features
-Add new expenses with descriptions and amounts
 
-Update existing expenses
-
-Delete expenses
-
-List all recorded expenses
-
-Filter expenses by month
-
-Get a summary of total expenses
-
-View total expenses for a specific month
+- Add new expenses with descriptions and amounts
+- Update existing expenses
+- Delete expenses
+- List all recorded expenses
+- Filter expenses by month
+- Get a summary of total expenses
+- View total expenses for a specific month
 
 
 ## Example Commands
