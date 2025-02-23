@@ -153,6 +153,7 @@ Make sure you have Python installed on your system. You can download it from [py
 
 Expenses are stored in a JSON file named expense_list.json. The data structure follows this format:
 
+```sh
 {
   "expenses": [
     {
@@ -163,7 +164,7 @@ Expenses are stored in a JSON file named expense_list.json. The data structure f
     }
   ]
 }
-
+```
 
 ### License
 
